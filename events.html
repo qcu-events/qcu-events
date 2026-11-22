@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+    <style>
+        .page-header,
+        .status-bar,
+        .cat-bar,
+        .events-section {
+            width: calc(100% - 64px);
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 28px;
+            padding-right: 28px;
+        }
+
+        .events-section {
+            padding-top: 40px;
+            padding-bottom: 65px;
+        }
+
+        .page-header {
+            padding-top: 60px;
+            padding-bottom: 10px;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-top: 10px;
+        }
+
+        .status-bar button {
+            padding: 10px 22px;
+            border: 2px solid #c98270;
+            border-radius: 999px;
+            background: transparent;
+            color: #c98270;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .status-bar button:hover,
+        .status-bar button.active {
+            background: #c98270;
+            color: #fefbf8;
+        }
+
+        .event-tag.live {
+            background: #b3261e;
+        }
+
+        .cat-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-top: 14px;
+        }
+
+        .cat-bar button {
+            padding: 8px 20px;
+            border: 2px solid #c98270;
+            border-radius: 999px;
+            background: transparent;
+            color: #c98270;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .cat-bar button:hover,
+        .cat-bar button.active {
+            background: #c98270;
+            color: #fefbf8;
+        }
+
+        .no-events {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="participantpage.html" class="logo" data-home>QCU <span>EVENTS</span></a>
+
+        <nav class="nav-links">
+            <a href="participantpage.html" data-home>Home</a>
+            <a href="events.html">All Events</a>
+            <a href="participantpage.html#organizations" data-home="#organizations">Organizations</a>
+        </nav>
+
+        <div class="nav-user">
+            <form action="events.html" method="get">
+                <input type="search" id="search" name="q" placeholder="Search current &amp; upcoming events..."
+                    autocomplete="off">
+                <button type="submit">Search</button>
+            </form>
+            <details class="user-menu">
+                <summary aria-label="Account menu">&#128100;</summary>
+                <div class="menu">
+                    <details class="edit-acc">
+                        <summary>Edit Accounts</summary>
+                        <a href="Account.php#user" class="sub">Edit User</a>
+                        <a href="Account.php#password" class="sub">Edit Password</a>
+                        <a href="Account.php#user" class="sub">Edit Profile</a>
+                    </details>
+                    <a href="History.html">History of Events</a>
+                    <a href="Registered.html">History of Registered Events</a>
+                    <a href="About.html">About</a>
+                    <a href="index.html" class="logout" data-logout>Log Out</a>
+                </div>
+            </details>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <span class="eyebrow">EVERYTHING AT QCU</span>
+        <h2>All Events</h2>
+        <p>Browse the events happening right now and the ones coming up.</p>
+    </section>
+
+    <!-- CURRENT / UPCOMING -->
+    <div class="status-bar">
+        <button class="active" data-status="all">All</button>
+        <button data-status="current">Happening Now</button>
+        <button data-status="upcoming">Upcoming</button>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="cat-bar">
+        <button class="active" data-category="all">All</button>
+        <button data-category="academics">Academics</button>
+        <button data-category="non-academic">Non-Academic</button>
+        <button data-category="sports">Sports</button>
+    </div>
+
+    <!-- EVENTS -->
+    <section class="events-section">
+        <p class="no-events" id="noEvents">No events found. Try a different search or filter.</p>
+
+        <!-- EVENTS POSTED BY ORGANIZERS APPEAR HERE (built by events.js) -->
+        <div class="event-grid" id="eventGrid"></div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <a href="participantpage.html" class="logo" data-home>QCU <span>EVENTS</span></a>
+        <p>Connecting the QCU community, one event at a time.</p>
+
+        <div class="footer-links">
+            <a href="participantpage.html" data-home>Home</a>
+            <a href="events.html">All Events</a>
+            <a href="participantpage.html#organizations" data-home="#organizations">Organizations</a>
+        </div>
+
+        <p class="copyright">© 2026 QCU Events. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

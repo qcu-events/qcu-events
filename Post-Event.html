@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post an Event | QCU EVENTS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+    --red: #C98270;
+    --red-dark: #9E6253;
+    --orange-red: #C98270;
+    --orange: #D99A87;
+    --peach: #F1DCD2;
+    --yellow: #E8DCC9;
+    --yellow-light: #FBF5F1;
+    --ice-blue: #F7EFEB;
+    --blue-light: #DCD9C9;
+    --blue: #A3A184;
+    --blue-medium: #85866B;
+    --blue-dark: #565744;
+    --white: #FFFCFA;
+    --background: #FAF4F0;
+    --text: #382D28;
+    --muted: #796C64;
+    --border: #E9DED7;
+}
+
+/* Page background */
+body:has(#eventForm) {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Main form container */
+body:has(#eventForm) .container {
+    max-width: 850px;
+    margin: 45px auto;
+    padding: 40px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(86, 71, 60, 0.10);
+}
+
+/* Back link */
+body:has(#eventForm) .back-link {
+    display: inline-block;
+    color: var(--red-dark);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+body:has(#eventForm) .back-link:hover {
+    color: var(--blue-dark);
+    transform: translateX(-4px);
+}
+
+/* Header */
+body:has(#eventForm) .header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+body:has(#eventForm) .header h1 {
+    color: var(--blue-dark);
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+body:has(#eventForm) .header p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Form groups */
+body:has(#eventForm) .form-group {
+    margin-bottom: 23px;
+}
+
+body:has(#eventForm) .form-group label {
+    display: block;
+    color: var(--blue-dark);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+/* Inputs, textarea, and dropdown */
+body:has(#eventForm) input,
+body:has(#eventForm) textarea,
+body:has(#eventForm) select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 11px;
+    background: var(--yellow-light);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s;
+    box-sizing: border-box;
+}
+
+body:has(#eventForm) input:focus,
+body:has(#eventForm) textarea:focus,
+body:has(#eventForm) select:focus {
+    border-color: var(--red);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(201, 130, 112, 0.13);
+}
+
+body:has(#eventForm) textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Date and time row */
+body:has(#eventForm) .row {
+    display: flex;
+    gap: 18px;
+}
+
+body:has(#eventForm) .row .form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Photo upload area */
+body:has(#eventForm) .upload-box {
+    padding: 30px;
+    border: 2px dashed var(--orange);
+    border-radius: 16px;
+    background: var(--ice-blue);
+    text-align: center;
+    transition: 0.3s;
+}
+
+body:has(#eventForm) .upload-box:hover {
+    background: var(--peach);
+    border-color: var(--red-dark);
+}
+
+/* Image preview */
+body:has(#eventForm) #preview {
+    display: block;
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    margin: 18px auto 0;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(56, 45, 40, 0.12);
+}
+
+/* Upload button / file input */
+body:has(#eventForm) #eventPhoto {
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    box-shadow: none;
+}
+
+/* Post Event button */
+body:has(#eventForm) .post-btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(158, 98, 83, 0.20);
+    transition: 0.3s;
+}
+
+body:has(#eventForm) .post-btn:hover {
+    background: var(--red-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(158, 98, 83, 0.25);
+}
+
+body:has(#eventForm) .post-btn:active {
+    transform: scale(0.98);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    body:has(#eventForm) .container {
+        margin: 15px;
+        padding: 24px 18px;
+    }
+
+    body:has(#eventForm) .header h1 {
+        font-size: 26px;
+    }
+
+    body:has(#eventForm) .row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="organizerpage.html" class="back-link">← Back to Home</a>
+
+    <div class="header">
+        <h1>Post an Event</h1>
+        <p>Share your organization's upcoming events with the QCU community.</p>
+    </div>
+
+    <form id="eventForm">
+
+        <!-- EVENT PHOTO -->
+        <div class="form-group">
+            <label>Event Poster / Photo</label>
+
+            <label class="upload-box" for="eventPhoto">
+                <strong>📷 Upload Event Photo</strong>
+                <p>Click here to select an image from your device.</p>
+
+                <input type="file"
+                       id="eventPhoto"
+                       accept="image/*"
+                       required>
+
+                <img id="preview" alt="Event poster preview" style="display: none;">
+            </label>
+        </div>
+
+          <!-- EVENT CATEGORY    -->
+        <div class="form-group">
+             <label for="category">Event Category</label>
+            <select id="category" required>
+            <option value="academics">Academics</option>
+            <option value="non-academic">Non-Academic</option>
+            <option value="sports">Sports</option>
+            </select>
+        </div>
+
+        <!-- EVENT NAME -->
+        <div class="form-group">
+            <label for="eventName">Event Name</label>
+            <input type="text"
+                   id="eventName"
+                   placeholder="Enter event name"
+                   required>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="form-group">
+            <label for="about">About the Event</label>
+            <textarea id="about"
+                      placeholder="Write information about your event..."
+                      required></textarea>
+        </div>
+
+        <!-- DATE AND TIME -->
+        <div class="row">
+
+            <div class="form-group">
+                <label for="eventDate">Start Date</label>
+                <input type="date" id="eventDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="eventEndDate">End Date (optional)</label>
+                <input type="date" id="eventEndDate">
+            </div>
+
+            <div class="form-group">
+                <label for="eventTime">Event Time</label>
+                <input type="time" id="eventTime" required>
+            </div>
+
+        </div>
+
+        <!-- VENUE -->
+        <div class="form-group">
+            <label for="venue">Event Venue</label>
+            <input type="text"
+                   id="venue"
+                   placeholder="Enter event location"
+                   required>
+        </div>
+        
+
+        <!-- ORGANIZATION -->
+        <div class="form-group">
+            <label for="organization">Responsible Organization</label>
+
+            <select id="organization" required>
+                <option value="">Select an Organization</option>
+                <option>QCU Ligers Pepsquad</option>
+                <option>Kalayaan Dance Company</option>
+                <option>Tanghalang Quezon City University</option>
+                <option>Student Council</option>
+                <option>Other Organization</option>
+            </select>
+        </div>
+
+        <button type="submit" class="post-btn">
+            Post Event
+        </button>
+
+    </form>
+</div>
+
+<script src="events.js"></script>
+
+</body>
+</html>

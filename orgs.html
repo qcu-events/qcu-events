@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Organizations | QCU EVENTS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+
+    <style>
+
+        .nav-user,
+
+        .nav-user form {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+        .nav-user input {
+
+            width: 260px;
+
+            padding: 10px 18px;
+
+            border: 2px solid #c98270;
+
+            border-radius: 999px;
+
+            background: #fefbf8;
+
+            color: #382d28;
+
+            font-family: inherit;
+
+        }
+
+        .nav-user button {
+
+            padding: 10px 16px;
+
+            border: 2px solid #c98270;
+
+            border-radius: 999px;
+
+            background: transparent;
+
+            color: #c98270;
+
+            font-weight: 700;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+        }
+
+        .nav-user button:hover {
+
+            background: #c98270;
+
+            color: #fefbf8;
+
+        }
+
+        .user-menu {
+
+            position: relative;
+
+        }
+
+        .user-menu summary {
+
+            list-style: none;
+
+            width: 44px;
+
+            height: 44px;
+
+            border-radius: 50%;
+
+            background: #c98270;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+        }
+
+        .user-menu summary::-webkit-details-marker {
+
+            display: none;
+
+        }
+
+        .user-menu .menu {
+
+            position: absolute;
+
+            right: 0;
+
+            top: 54px;
+
+            width: 230px;
+
+            padding: 8px;
+
+            background: #fefbf8;
+
+            border: 2px solid #c98270;
+
+            border-radius: 16px;
+
+            z-index: 1000;
+
+        }
+
+        .user-menu .menu a {
+
+            display: block;
+
+            padding: 10px 12px;
+
+            border-radius: 10px;
+
+            color: #382d28;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+        .user-menu .menu a:hover {
+
+            background: #f6e8e3;
+
+        }
+
+        .user-menu .menu a.sub {
+
+            padding-left: 28px;
+
+            font-weight: 500;
+
+            font-size: 0.95em;
+
+        }
+
+        .user-menu .menu .edit-acc summary {
+
+            position: static;
+
+            width: auto;
+
+            height: auto;
+
+            border-radius: 10px;
+
+            background: transparent;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 10px 12px;
+
+            color: #382d28;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+        .user-menu .menu .edit-acc summary:hover {
+
+            background: #f6e8e3;
+
+        }
+
+        .user-menu .menu .edit-acc summary::after {
+
+            content: "▾";
+
+            transition: transform .2s;
+
+        }
+
+        .user-menu .menu .edit-acc[open] summary::after {
+
+            transform: rotate(180deg);
+
+        }
+
+        .user-menu .menu .logout {
+
+            color: #b3261e;
+
+        }
+
+        .page-header,
+
+        .status-bar,
+
+        .cat-bar,
+
+        .events-section {
+
+            width: calc(100% - 64px);
+
+            max-width: 1440px;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+            padding-left: 28px;
+
+            padding-right: 28px;
+
+        }
+
+        .events-section {
+
+            padding-top: 40px;
+
+            padding-bottom: 65px;
+
+        }
+
+        .page-header {
+
+            padding-top: 60px;
+
+            padding-bottom: 10px;
+
+        }
+
+        .status-bar {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            padding-top: 10px;
+
+        }
+
+        .status-bar button {
+
+            padding: 10px 22px;
+
+            border: 2px solid #c98270;
+
+            border-radius: 999px;
+
+            background: transparent;
+
+            color: #c98270;
+
+            font-weight: 700;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+        }
+
+        .status-bar button:hover,
+
+        .status-bar button.active {
+
+            background: #c98270;
+
+            color: #fefbf8;
+
+        }
+
+        .event-tag.live {
+
+            background: #b3261e;
+
+        }
+
+        .cat-bar {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            padding-top: 14px;
+
+        }
+
+        .cat-bar button {
+
+            padding: 8px 20px;
+
+            border: 2px solid #c98270;
+
+            border-radius: 999px;
+
+            background: transparent;
+
+            color: #c98270;
+
+            font-weight: 700;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+        }
+
+        .cat-bar button:hover,
+
+        .cat-bar button.active {
+
+            background: #c98270;
+
+            color: #fefbf8;
+
+        }
+
+        .no-events {
+
+            padding-top: 20px;
+
+            padding-bottom: 20px;
+
+            display: none;
+
+        }
+
+        /* ===== QCU ORGANIZATIONS PAGE REDESIGN ===== */
+        :root {
+            --org-cream: #fbf4ef;
+            --org-white: #fffdfa;
+            --org-rose: #c98270;
+            --org-rose-dark: #ad604f;
+            --org-ink: #382d28;
+            --org-line: #edc9bd;
+        }
+
+        body {
+            background: var(--org-cream) !important;
+            color: var(--org-ink);
+        }
+
+        .navbar {
+            width: calc(100% - 64px) !important;
+            max-width: 1500px !important;
+            margin: 14px auto 0 !important;
+            padding: 12px 28px !important;
+            min-height: 76px;
+            border-radius: 24px !important;
+            background: rgba(255, 253, 250, .94) !important;
+            box-shadow: 0 10px 32px rgba(91, 55, 43, .10) !important;
+            position: relative;
+            z-index: 20;
+        }
+
+        .navbar .logo {
+            color: var(--org-rose-dark) !important;
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 29px !important;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .navbar .nav-links a {
+            color: var(--org-ink) !important;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a[href="orgs.html"] {
+            color: var(--org-rose-dark) !important;
+        }
+
+        .nav-user, .nav-user form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-user input {
+            width: 250px;
+            padding: 12px 18px;
+            border: 1.7px solid var(--org-rose);
+            border-radius: 999px;
+            background: var(--org-white);
+            color: var(--org-ink);
+            font-family: inherit;
+            outline: none;
+        }
+
+        .nav-user button {
+            padding: 11px 17px;
+            border: 1.7px solid var(--org-rose);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--org-rose-dark);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .nav-user button:hover {
+            background: var(--org-rose);
+            color: white;
+        }
+
+        .user-menu summary {
+            background: var(--org-rose) !important;
+            color: white;
+        }
+
+        .org-hero {
+            width: 100%;
+            min-height: 270px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background-color: var(--org-cream);
+            background-image:
+                linear-gradient(90deg,
+                    rgba(251,244,239,1) 0%,
+                    rgba(251,244,239,.98) 32%,
+                    rgba(251,244,239,.78) 47%,
+                    rgba(251,244,239,.20) 68%,
+                    rgba(251,244,239,.02) 100%),
+                url("images/qcu-building.jpg");
+            background-repeat: no-repeat;
+            background-position: center, right 43%;
+            background-size: cover, cover;
+        }
+
+        .org-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(201,130,112,.12), transparent 44%);
+            pointer-events: none;
+        }
+
+        .org-hero-content {
+            width: calc(100% - 64px);
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 38px 28px 52px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .org-hero .eyebrow {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #9c5949;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .org-hero h1 {
+            margin: 0 0 10px;
+            color: #38241f;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(38px, 4.2vw, 62px);
+            line-height: 1.05;
+            font-weight: 700;
+        }
+
+        .org-hero h1 em {
+            color: var(--org-rose-dark);
+            font-weight: 700;
+        }
+
+        .org-hero p {
+            margin: 0;
+            max-width: 600px;
+            color: #3f302b;
+            font-size: 18px;
+            line-height: 1.45;
+        }
+
+        .hero-wave {
+            position: absolute;
+            z-index: 1;
+            left: -5%;
+            right: -5%;
+            bottom: -43px;
+            height: 82px;
+            border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+            background: rgba(201,130,112,.30);
+            transform: rotate(-1.5deg);
+            pointer-events: none;
+        }
+
+        .hero-wave::after {
+            content: "";
+            position: absolute;
+            inset: 13px 0 0;
+            border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+            background: rgba(251,244,239,.72);
+        }
+
+        .org-toolbar {
+            width: calc(100% - 64px);
+            max-width: 1440px;
+            margin: 18px auto 0;
+            padding: 0 28px;
+            display: grid;
+            grid-template-columns: minmax(220px, 1.1fr) auto auto;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .org-search {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 18px;
+            border: 1.7px solid var(--org-line);
+            border-radius: 999px;
+            background: rgba(255,253,250,.9);
+            color: var(--org-ink);
+        }
+
+        .org-search span {
+            font-size: 25px;
+            line-height: 1;
+        }
+
+        .org-search input {
+            width: 100%;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: var(--org-ink);
+            font: inherit;
+        }
+
+        .cat-bar {
+            width: auto !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 0 0 28px !important;
+            border-left: 1px solid #c98270;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cat-bar button {
+            padding: 11px 23px;
+            border: 1.7px solid var(--org-rose);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--org-rose-dark);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .cat-bar button:hover,
+        .cat-bar button.active {
+            background: var(--org-rose);
+            color: white;
+        }
+
+        .org-count {
+            min-height: 44px;
+            padding-left: 26px;
+            border-left: 1px solid #c98270;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+            color: var(--org-ink);
+            font-size: 14px;
+        }
+
+        .org-count span {
+            font-size: 24px;
+        }
+
+        .events-section {
+            width: calc(100% - 64px) !important;
+            max-width: 1440px !important;
+            margin: 0 auto !important;
+            padding: 24px 28px 70px !important;
+        }
+
+        .section-heading {
+            margin: 0 0 20px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 5px;
+            color: #38241f;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: #51413a;
+            font-size: 16px;
+        }
+
+        .event-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px !important;
+            align-items: stretch;
+        }
+
+        .event-card {
+            min-width: 0;
+            overflow: hidden;
+            display: flex !important;
+            flex-direction: column;
+            border: 1px solid #efd8cf !important;
+            border-radius: 18px !important;
+            background: rgba(255,253,250,.94) !important;
+            box-shadow: 0 8px 22px rgba(91,55,43,.08) !important;
+            color: var(--org-ink) !important;
+            text-decoration: none !important;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(91,55,43,.13) !important;
+        }
+
+        .event-photo {
+            width: 100% !important;
+            height: 165px !important;
+            min-height: 165px;
+            display: block;
+            object-fit: cover !important;
+        }
+
+        .event-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 16px 20px 19px !important;
+        }
+
+        .event-tag {
+            display: inline-block;
+            margin-bottom: 9px;
+            padding: 6px 13px;
+            border-radius: 999px;
+            background: #f4ded6 !important;
+            color: #875044 !important;
+            font-size: 10px !important;
+            font-weight: 800;
+            letter-spacing: .7px;
+        }
+
+        .event-info h3 {
+            margin: 0 0 7px !important;
+            color: #38241f !important;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px !important;
+            line-height: 1.2;
+        }
+
+        .event-info p {
+            margin: 0 0 16px !important;
+            color: #51413a !important;
+            font-size: 14px !important;
+            line-height: 1.5;
+        }
+
+        .event-info::after {
+            content: "View Organization  →";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            margin-top: auto;
+            padding: 11px 18px;
+            border-radius: 999px;
+            background: var(--org-rose);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .no-events {
+            display: none;
+            padding: 24px 0;
+            color: #76564c;
+            text-align: center;
+        }
+
+        .footer {
+            background: #f3e5df !important;
+            color: var(--org-ink) !important;
+        }
+
+        .footer .logo {
+            color: var(--org-rose-dark) !important;
+        }
+
+        @media (max-width: 1050px) {
+            .navbar {
+                width: calc(100% - 32px) !important;
+                padding: 12px 18px !important;
+            }
+            .org-toolbar {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .cat-bar {
+                padding: 0 !important;
+                border-left: 0;
+                justify-content: flex-start;
+            }
+            .org-count {
+                padding: 0;
+                border: 0;
+            }
+            .event-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                width: calc(100% - 24px) !important;
+                margin-top: 8px !important;
+                border-radius: 18px !important;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .navbar .logo {
+                font-size: 23px !important;
+            }
+            .nav-user input {
+                width: min(48vw, 220px);
+            }
+            .nav-user button {
+                display: none;
+            }
+            .org-hero {
+                min-height: 300px;
+                background-position: center, 62% center;
+                background-image:
+                    linear-gradient(90deg, rgba(251,244,239,.98) 0%, rgba(251,244,239,.91) 58%, rgba(251,244,239,.48) 100%),
+                    url("qcu-building.jpg");
+            }
+            .org-hero-content {
+                width: 100%;
+                padding: 42px 26px 58px;
+            }
+            .org-hero h1 {
+                font-size: 42px;
+            }
+            .org-hero p {
+                font-size: 15px;
+            }
+            .desktop-break {
+                display: none;
+            }
+            .org-toolbar,
+            .events-section {
+                width: 100% !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+            .cat-bar {
+                gap: 8px;
+            }
+            .cat-bar button {
+                padding: 9px 14px;
+                font-size: 12px;
+            }
+            .section-heading h2 {
+                font-size: 27px;
+            }
+            .event-grid {
+                grid-template-columns: 1fr;
+                gap: 16px !important;
+            }
+            .event-photo {
+                height: 190px !important;
+            }
+        }
+
+    
+        /* FINAL HERO: BUILDING PHOTO FEATHERED INTO THE CREAM BACKGROUND */
+        .org-hero {
+            position: relative !important;
+            isolation: isolate;
+            overflow: hidden;
+            background: #fbf4ef !important;
+        }
+
+        .org-hero::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 28%;
+            background-image: url("images/qcu-building.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right center;
+            -webkit-mask-image: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(0,0,0,.12) 12%,
+                rgba(0,0,0,.58) 30%,
+                #000 52%
+            );
+            mask-image: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(0,0,0,.12) 12%,
+                rgba(0,0,0,.58) 30%,
+                #000 52%
+            );
+            pointer-events: none;
+        }
+
+        .org-hero::after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(251,244,239,.34) 0%,
+                rgba(251,244,239,.16) 38%,
+                rgba(251,244,239,0) 72%
+            );
+            pointer-events: none;
+        }
+
+        .org-hero-content {
+            position: relative !important;
+            z-index: 3 !important;
+        }
+
+        .hero-wave {
+            position: absolute;
+            z-index: 2 !important;
+        }
+
+        .section-heading {
+            display: block !important;
+            text-align: left !important;
+        }
+
+        .section-heading h2,
+        .section-heading p {
+            display: block !important;
+            width: 100%;
+            text-align: left !important;
+        }
+
+        @media (max-width: 700px) {
+            .org-hero::before {
+                left: 12%;
+                background-position: 65% center;
+                -webkit-mask-image: linear-gradient(
+                    to right,
+                    transparent 0%,
+                    rgba(0,0,0,.25) 22%,
+                    #000 72%
+                );
+                mask-image: linear-gradient(
+                    to right,
+                    transparent 0%,
+                    rgba(0,0,0,.25) 22%,
+                    #000 72%
+                );
+            }
+            .org-hero::after {
+                background: linear-gradient(
+                    90deg,
+                    rgba(251,244,239,.68) 0%,
+                    rgba(251,244,239,.34) 55%,
+                    rgba(251,244,239,.08) 100%
+                );
+            }
+        }
+
+    
+
+    
+        
+
+    
+        /* NAVBAR: LINKS CENTERED TO THE WHOLE BAR */
+        .navbar {
+            position: relative !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+
+        .navbar > .logo {
+            position: relative !important;
+            z-index: 2;
+            flex: 0 0 auto !important;
+            margin: 0 !important;
+            border: 0 !important;
+        }
+
+        .navbar .nav-links {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 0 0 auto !important;
+            gap: 26px !important;
+            width: max-content !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+        }
+
+        .navbar .nav-links a {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+            margin: 0 !important;
+            padding: 13px 19px !important;
+            border: 0 !important;
+            border-radius: 999px !important;
+            line-height: 1 !important;
+        }
+
+        .navbar .nav-links a[href="orgs.html"],
+        .navbar .nav-links a[aria-current="page"] {
+            background: #f2d6ce !important;
+            color: #874638 !important;
+        }
+
+        .navbar .nav-user {
+            position: relative !important;
+            z-index: 2;
+            flex: 0 0 auto !important;
+            margin-left: auto !important;
+        }
+
+        .navbar .nav-user form {
+            display: none !important;
+        }
+
+
+        @media (max-width: 700px) {
+            .navbar {
+                flex-wrap: wrap !important;
+            }
+            .navbar .nav-links {
+                position: static !important;
+                transform: none !important;
+                order: 3;
+                width: 100% !important;
+                flex: 1 0 100% !important;
+                gap: 8px !important;
+            }
+            .org-hero::before {
+                background-size: auto 100% !important;
+                background-position: right center !important;
+            }
+        }
+
+    
+        /* HOMEPAGE-MATCHED TYPOGRAPHY */
+        body {
+            font-family: Georgia, "Times New Roman", serif !important;
+        }
+
+        .navbar .logo {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 23px !important;
+        }
+
+        .navbar .nav-links a,
+        .org-hero .eyebrow,
+        .org-hero p,
+        .org-search,
+        .cat-bar button,
+        .org-count,
+        .section-heading p,
+        .event-tag,
+        .event-info p,
+        .event-info::after,
+        .nav-user button,
+        .nav-user input {
+            font-family: "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        .navbar .nav-links a {
+            font-size: 12px !important;
+            font-weight: 700 !important;
+        }
+
+        .org-hero .eyebrow {
+            font-size: 12px !important;
+            letter-spacing: 3px !important;
+            font-weight: 700 !important;
+        }
+
+        .org-hero h1 {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: clamp(36px, 4vw, 52px) !important;
+            line-height: 1.12 !important;
+        }
+
+        .org-hero p {
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+        }
+
+        .section-heading h2 {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 21px !important;
+            line-height: 1.25 !important;
+        }
+
+        .section-heading p {
+            font-size: 13px !important;
+            line-height: 1.6 !important;
+        }
+
+        .event-info h3 {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 21px !important;
+            line-height: 1.25 !important;
+        }
+
+        .event-info p {
+            font-size: 13px !important;
+            line-height: 1.6 !important;
+        }
+
+        .event-tag {
+            font-size: 11px !important;
+        }
+
+        .event-info::after,
+        .cat-bar button {
+            font-size: 14px !important;
+        }
+
+        @media (max-width: 700px) {
+            .navbar .logo {
+                font-size: 23px !important;
+            }
+            .org-hero h1 {
+                font-size: 36px !important;
+            }
+            .org-hero p {
+                font-size: 14px !important;
+            }
+            .section-heading h2,
+            .event-info h3 {
+                font-size: 21px !important;
+            }
+        }
+
+    
+        /* HERO PHOTO: KEEP CURRENT SIZE, BLEND ONLY THE LEFT EDGE */
+        .org-hero {
+            position: relative !important;
+            overflow: hidden !important;
+            isolation: isolate !important;
+            background: #fbf4ef !important;
+        }
+
+        .org-hero::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: auto !important;
+            width: 41% !important;
+            background-image: url("images/qcu-building.jpg") !important;
+            background-repeat: no-repeat !important;
+            background-position: right center !important;
+            background-size: cover !important;
+            -webkit-mask-image: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(0,0,0,.12) 12%,
+                rgba(0,0,0,.48) 30%,
+                #000 48%
+            ) !important;
+            mask-image: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(0,0,0,.12) 12%,
+                rgba(0,0,0,.48) 30%,
+                #000 48%
+            ) !important;
+            pointer-events: none;
+        }
+
+        .org-hero::after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(
+                90deg,
+                rgba(251,244,239,0) 0%,
+                rgba(251,244,239,0) 65%,
+                rgba(251,244,239,.10) 100%
+            );
+        }
+
+        .org-hero-content {
+            position: relative !important;
+            z-index: 3 !important;
+        }
+
+        .hero-wave {
+            position: absolute;
+            z-index: 2 !important;
+        }
+
+        @media (max-width: 700px) {
+            .org-hero::before {
+                width: 52% !important;
+                background-position: right center !important;
+                background-size: cover !important;
+            }
+        }
+
+    
+        /* NAVIGATION TYPOGRAPHY — MATCH EVENTS PAGE */
+        .navbar .nav-links a {
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: 10px !important;
+            font-weight: 700 !important;
+            letter-spacing: .65px !important;
+            text-transform: uppercase !important;
+        }
+
+        .navbar > .logo {
+            font-family: Georgia, "Times New Roman", serif !important;
+            font-size: 27px !important;
+            font-weight: 700 !important;
+        }
+
+        @media (max-width: 700px) {
+            .navbar .nav-links a {
+                font-size: 10px !important;
+            }
+            .navbar > .logo {
+                font-size: 23px !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="participantpage.html" class="logo" data-home>QCU <span>EVENTS</span></a>
+
+        <nav class="nav-links">
+
+            <a href="participantpage.html" data-home>Home</a>
+
+            <a href="events.html">All Events</a>
+
+            <a href="orgs.html">Organizations</a>
+
+        </nav>
+
+        <div class="nav-user">
+
+            <details class="user-menu">
+
+                <summary aria-label="Account menu">&#128100;</summary>
+
+                <div class="menu">
+
+                    <details class="edit-acc">
+
+                        <summary>Edit Accounts</summary>
+
+                        <a href="Account.php#user" class="sub">Edit User</a>
+
+                        <a href="Account.php#password" class="sub">Edit Password</a>
+
+                        <a href="Account.php#user" class="sub">Edit Profile</a>
+
+                    </details>
+
+                    <a href="History.html">History of Events</a>
+
+                    <a href="Registered.html">History of Registered Events</a>
+
+                    <a href="About.html">About</a>
+
+                    <a href="index.html" class="logout" data-logout>Log Out</a>
+
+                </div>
+
+            </details>
+
+        </div>
+
+    </header>
+
+    <!-- QCU HERO -->
+    <section class="org-hero">
+        <div class="org-hero-content">
+            <span class="eyebrow">STUDENT COMMUNITIES AT QCU</span>
+            <h1>Find Your <em>Community.</em></h1>
+            <p>Explore organizations, discover your interests, and connect<br class="desktop-break">
+               with fellow QCU students.</p>
+        </div>
+        <div class="hero-wave" aria-hidden="true"></div>
+    </section>
+
+    <!-- ORGANIZATION SEARCH AND FILTERS -->
+    <div class="org-toolbar">
+        <label class="org-search" for="orgSearchInput">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" id="orgSearchInput" placeholder="Search organizations..." autocomplete="off">
+        </label>
+        <div class="cat-bar" aria-label="Filter organizations">
+            <button class="active" type="button" data-category="all">All</button>
+            <button type="button" data-category="department">Department</button>
+            <button type="button" data-category="academic">Academic</button>
+            <button type="button" data-category="non-academic">Non-Academic</button>
+        </div>
+        <div class="org-count"><span aria-hidden="true">♧</span><strong id="orgCount">Organizations</strong></div>
+    </div>
+
+    <!-- ORGANIZATIONS -->
+
+    <section class="events-section">
+        <div class="section-heading">
+            <h2>Student Organizations</h2>
+            <p>Discover student groups and communities at QCU.</p>
+        </div>
+
+        <div class="event-grid">
+
+            <a href="orgs.html" class="event-card" data-category="department">
+
+                <img class="event-photo" src="images/COB-TEAM.JPG" alt="QCU College of Business Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">DEPARTMENT</span>
+
+                    <h3>College of Business</h3>
+
+                    <p>Student organizations under the College of Business.</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="department">
+
+                <img class="event-photo" src="images/collegeeduc.cover.jpg" alt="QCU College of Education Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">DEPARTMENT</span>
+
+                    <h3>College of Education</h3>
+
+                    <p>Student organizations under the College of Education.</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="department">
+
+                <img class="event-photo" src="images/collegeccs-cover.jpg" alt="QCU College of Computer Studies Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">DEPARTMENT</span>
+
+                    <h3>College of Computer Studies</h3>
+
+                    <p>Student organizations under the College of Computer Studies.</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="department">
+
+                <img class="event-photo" src="images/ce.logo.jpg" alt="QCU College of Engineering Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">DEPARTMENT</span>
+
+                    <h3>College of Engineering</h3>
+
+                    <p>Student organizations under the College of Engineering.</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/yes.cover.jpg" alt="YES Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Young Entrepreneurs&#x27; Society (YES)</h3>
+
+                    <p>College of Business (BSENT)</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/jpia.logo.jpg" alt="JPIA Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Junior Philippine Institute of Accountants (JPIA)</h3>
+
+                    <p>College of Accountancy</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/jmaex.cover.jpg" alt="JMAEX Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Junior Management Accountant Executives (JMAEX)</h3>
+
+                    <p>College of Accountancy</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/lesit-logo.jpg" alt="LESIT Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>League of Excellent Students in Information Technology (LESIT)</h3>
+
+                    <p>College of Computer Studies</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/syvsis.cover.jpg" alt="SYVSIS Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Synergy of Young Visionary Students in Information System (SYVSIS)</h3>
+
+                    <p>College of Computer Studies</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/jpcs-cover.jpg" alt="JPCS Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Junior Philippine Computer Society (JPCS)</h3>
+
+                    <p>College of Computer Studies</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/edukclub.cover.jpg" alt="Eduk Club Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Eduk Club</h3>
+
+                    <p>College of Education (BECEd)</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/iecep.cover.jpg" alt="IECEP Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Institute of Electronic Engineering of the Philippines (IECEP)</h3>
+
+                    <p>College of Engineering</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="academic">
+
+                <img class="event-photo" src="images/ce.logo.jpg" alt="ICPEP Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">ACADEMIC</span>
+
+                    <h3>Institute of Computer Engineers of the Philippines (ICPEP)</h3>
+
+                    <p>College of Engineering</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/ssc-logo.jpg" alt="SSC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Supreme Student Council (SSC)</h3>
+
+                    <p>Student Governance</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/tanghalangteam.jpg" alt="TQCU Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Tanghalan Quezon City University (TQCU)</h3>
+
+                    <p>Performing Arts</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/css.cover.jpg" alt="CSS Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Creative Student Society (CSS)</h3>
+
+                    <p>Creative Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/aws.logo.jpg" alt="AWS Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Amazon Web Services Cloud Club (AWS)</h3>
+
+                    <p>Cloud Computing Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/kalayaanteam.jpg" alt="KDC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Kalayaan Dance Community (KDC)</h3>
+
+                    <p>Dance Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/genz.cover.jpg" alt="GEN Z Learners Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>GEN Z Learners</h3>
+
+                    <p>Student Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/kec.logo.jpg" alt="KEC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Kyusi E-Sports Community (KEC)</h3>
+
+                    <p>E-Sports Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/kcc.logo.jpg" alt="KCC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Kyusi Cosplay Community (KCC)</h3>
+
+                    <p>Cosplay Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/ic.logo.jpg" alt="Iskolar Council Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Iskolar Council (IC)</h3>
+
+                    <p>Student Council</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/ytr.cover.jpg" alt="YTR Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Youth on the Rock (YTR)</h3>
+
+                    <p>Student Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/pco.cover.jpg" alt="Peer Counselors Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Peer Counselors (PC)</h3>
+
+                    <p>Peer Support</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/tp.logo.jpg" alt="TIMES Publication Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>TIMES Publication (TP)</h3>
+
+                    <p>Student Publication</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/jcs.logo.jpg" alt="JCS Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Jade Cultural Society (JCS)</h3>
+
+                    <p>Cultural Organization</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/robotics.logo.jpg" alt="Robotics Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Robotics</h3>
+
+                    <p>Robotics Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/ligers-team.jpg" alt="Ligers Squad Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Ligers Squad</h3>
+
+                    <p>Cheerleading and Dance</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/enc.logo.jpg" alt="ENC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Every Nation Campus Nova Bayan (ENC)</h3>
+
+                    <p>Campus Community</p>
+
+                </div>
+
+            </a>
+
+            <a href="orgs.html" class="event-card" data-category="non-academic">
+
+                <img class="event-photo" src="images/msc.cover.jpg" alt="MSC Cover">
+
+                <div class="event-info">
+
+                    <span class="event-tag">NON-ACADEMIC</span>
+
+                    <h3>Microsoft Student Community (MSC)</h3>
+
+                    <p>Technology Community</p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <p class="no-events" id="noEvents">No organizations found.</p>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <a href="participantpage.html" class="logo" data-home>QCU <span>EVENTS</span></a>
+
+        <p>Connecting the QCU community, one event at a time.</p>
+
+        <div class="footer-links">
+
+            <a href="participantpage.html" data-home>Home</a>
+
+            <a href="events.html">All Events</a>
+
+            <a href="orgs.html">Organizations</a>
+
+        </div>
+
+        <p class="copyright">© 2026 QCU Events. All rights reserved.</p>
+
+    </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = Array.from(document.querySelectorAll(".event-card"));
+        const categoryButtons = Array.from(document.querySelectorAll(".cat-bar button"));
+        const searchInput = document.getElementById("orgSearchInput");
+        const noEvents = document.getElementById("noEvents");
+        const count = document.getElementById("orgCount");
+        let activeCategory = "all";
+
+        const params = new URLSearchParams(window.location.search);
+        if (searchInput) searchInput.value = params.get("q") || "";
+
+        function filterOrganizations() {
+            const query = (searchInput?.value || "").trim().toLowerCase();
+            let visible = 0;
+
+            cards.forEach(card => {
+                const categoryMatch = activeCategory === "all" || card.dataset.category === activeCategory;
+                const textMatch = !query || card.textContent.toLowerCase().includes(query);
+                const show = categoryMatch && textMatch;
+                card.style.display = show ? "" : "none";
+                if (show) visible++;
+            });
+
+            if (noEvents) noEvents.style.display = visible ? "none" : "block";
+            if (count) count.textContent = visible + (visible === 1 ? " Organization" : " Organizations");
+        }
+
+        categoryButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                activeCategory = this.dataset.category || "all";
+                categoryButtons.forEach(item => item.classList.toggle("active", item === this));
+                filterOrganizations();
+            });
+        });
+
+        if (searchInput) searchInput.addEventListener("input", filterOrganizations);
+        filterOrganizations();
+    });
+    </script>
+
+</body>
+</html>

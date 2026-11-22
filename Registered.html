@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of Registered Events | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+</head>
+<body>
+    <div class="acct">
+        <aside class="side">
+            <h3>Your account</h3>
+            <a href="Account.html">Profile</a>
+            <a href="History.html">History of Events</a>
+            <a href="Registered.html" class="active" aria-current="page" data-role="participant">History of Registered Events</a>
+            <a href="CreatedEvents.html" data-role="organizer">Events Created</a>
+            <a href="About.html">About</a>
+            <a href="participantpage.html" data-home>&larr; Back to QCU Events</a>
+            <a href="index.html" data-logout>Log Out</a>
+        </aside>
+        <main class="main">
+            <h1>History of Registered Events</h1>
+            <section class="history-card">
+                <p>Events you registered for.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Registered On</th>
+                        </tr>
+                    </thead>
+                    <tbody id="registeredBody">
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

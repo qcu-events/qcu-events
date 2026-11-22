@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+</head>
+<body>
+    <div class="acct">
+        <aside class="side">
+            <h3>Your account</h3>
+            <a href="Account.html" class="active" aria-current="page">Profile</a>
+            <a href="History.html">History of Events</a>
+            <a href="Registered.html" data-role="participant">History of Registered Events</a>
+            <a href="CreatedEvents.html" data-role="organizer">Events Created</a>
+            <a href="About.html">About</a>
+            <a href="participantpage.html" id="back-link" data-home>&larr; Back to QCU Events</a>
+            <a href="index.html" data-logout>Log Out</a>
+        </aside>
+
+        <main class="main">
+            <h1>Account</h1>
+
+            <p id="success" class="form-msg ok" role="status" hidden>Your changes were saved.</p>
+            <p id="error" class="form-msg err" role="alert" hidden></p>
+
+            <form action="Account.php" method="post" class="main-form">
+                <section id="user">
+                    <h3>Profile</h3>
+
+                    <label for="first">First name</label>
+                    <input type="text" id="first" name="first" maxlength="100" required>
+
+                    <label for="last">Last name</label>
+                    <input type="text" id="last" name="last" maxlength="100" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" readonly>
+
+                    <label for="studentId" id="id-label">ID</label>
+                    <input type="text" id="studentId" readonly>
+                </section>
+
+                <section id="password">
+                    <h3>Change password</h3>
+                    <p>Leave blank to keep your current password.</p>
+
+                    <label for="current">Current password</label>
+                    <input type="password" id="current" name="current" autocomplete="current-password">
+
+                    <label for="new">New password</label>
+                    <input type="password" id="new" name="new" minlength="8" autocomplete="new-password">
+
+                    <label for="confirm">Confirm new password</label>
+                    <input type="password" id="confirm" name="confirm" autocomplete="new-password">
+                </section>
+
+                <div class="btns">
+                    <a href="participantpage.html" id="cancel-link" class="btn">Cancel</a>
+                    <button type="submit" class="btn save">Save changes</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

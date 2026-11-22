@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+</head>
+<body class="login-choice-page">
+
+    <!-- VIEW 1: choose Participant or Organizer -->
+    <main class="login-choice-layout" id="view-choice">
+
+        <section class="login-choice-panel">
+            <h1>QCU EVENTS</h1>
+
+            <div class="login-choice-content">
+                <span class="login-eyebrow">YOUR CAMPUS, YOUR COMMUNITY</span>
+                <h2>Welcome to <span class="highlight-text">QCU EVENTS!</span></h2>
+                <p>Discover, join, and create exciting campus events.</p>
+
+                <div class="login-choice-options">
+
+                    <div class="login-choice-card">
+                        <h3>Participant</h3>
+                        <p>Find events and register as a participant.</p>
+                        <a href="login.html?role=participant">Join an Event ↗</a>
+                    </div>
+
+                    <div class="login-choice-card">
+                        <h3>Organizer</h3>
+                        <p>Create and manage your own events.</p>
+                        <a href="login.html?role=organizer">Organize an Event ↗</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="login-footer-text">© 2026 QCU Events</p>
+        </section>
+
+        <section class="login-choice-image">
+            <div class="login-image-text">
+                <span>BE PART OF THE COMMUNITY</span>
+                <h2>Your next campus experience starts here.</h2>
+                <p>Discover what's happening around QCU.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- VIEW 2: organizer login -->
+    <main class="organizer-login-wrapper" id="view-organizer" hidden>
+        <section class="organizer-login-form">
+            <div class="organizer-brand">QCU EVENTS</div>
+            <div class="organizer-form-content">
+                <span class="organizer-eyebrow">YOUR CAMPUS, YOUR COMMUNITY</span>
+                <h1>Welcome, Organizer!</h1>
+                <p class="organizer-subtitle">Log in to create and manage your campus events.</p>
+                <form class="login-form" data-role="organizer">
+                    <p class="login-message" role="status"></p>
+                    <div class="organizer-field">
+                        <label for="organizerStudentID">Student ID</label>
+                        <input type="text" id="organizerStudentID" name="studentID" placeholder="Enter your Student ID" required>
+                    </div>
+                    <div class="organizer-field">
+                        <label for="organizerEmail">Email</label>
+                        <input type="email" id="organizerEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="organizer-field">
+                        <label for="organizerPassword">Password</label>
+                        <input type="password" id="organizerPassword" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="organizer-forgot"><a href="#">Forgot password?</a></div>
+                    <button type="submit" class="organizer-submit">Log In <span>→</span></button>
+                </form>
+                <div class="organizer-signup">Don't have an account? <a href="signup.html">Sign Up</a></div>
+                <a href="index.html" class="organizer-back">← Back to Home</a>
+            </div>
+            <div class="organizer-copyright">© 2026 QCU Events</div>
+        </section>
+        <section class="organizer-gradient-side">
+            <div class="organizer-circle circle-one"></div>
+            <div class="organizer-circle circle-two"></div>
+            <div class="organizer-circle circle-three"></div>
+            <div class="organizer-side-content">
+                <span>CREATE. ORGANIZE. INSPIRE.</span>
+                <h2>Bring your campus events to life.</h2>
+                <p>Manage your events, connect with students, and create memorable experiences at QCU.</p>
+            </div>
+            <div class="organizer-side-label">QUEZON CITY UNIVERSITY</div>
+        </section>
+    </main>
+
+    <!-- VIEW 3: participant login -->
+    <main class="participant-login-wrapper" id="view-participant" hidden>
+        <section class="participant-login-form">
+            <div class="participant-brand">QCU EVENTS</div>
+            <div class="participant-form-content">
+                <span class="participant-eyebrow">YOUR CAMPUS, YOUR COMMUNITY</span>
+                <h1>Welcome back!</h1>
+                <p class="participant-subtitle">Sign in to discover and join campus events.</p>
+                <form class="login-form" data-role="participant">
+                    <p class="login-message" role="status"></p>
+                    <div class="participant-field">
+                        <label for="participantStudentID">Student ID</label>
+                        <input type="text" id="participantStudentID" name="studentID" required placeholder="Enter your Student ID">
+                    </div>
+                    <div class="participant-field">
+                        <label for="participantEmail">Email</label>
+                        <input type="email" id="participantEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="participant-field">
+                        <label for="participantPassword">Password</label>
+                        <input type="password" id="participantPassword" name="password" required placeholder="Enter your password">
+                    </div>
+                    <div class="participant-forgot"><a href="#">Forgot password?</a></div>
+                    <button type="submit" class="participant-submit">Log In <span>→</span></button>
+                </form>
+                <div class="participant-signup">Don't have an account? <a href="signup.html">Sign Up</a></div>
+                <a href="index.html" class="participant-back">← Back to Home</a>
+            </div>
+            <div class="participant-copyright">© 2026 QCU Events</div>
+        </section>
+        <section class="participant-gradient-side">
+            <div class="participant-side-overlay"></div>
+            <div class="gradient-circle circle-one"></div>
+            <div class="gradient-circle circle-two"></div>
+            <div class="gradient-circle circle-three"></div>
+            <div class="participant-side-content">
+                <span>DISCOVER. CONNECT. EXPERIENCE.</span>
+                <h2>Your campus journey starts here.</h2>
+                <p>Find your community, explore exciting events, and make every campus moment count.</p>
+            </div>
+            <div class="participant-side-label">QUEZON CITY UNIVERSITY</div>
+        </section>
+    </main>
+
+</body>
+</html>

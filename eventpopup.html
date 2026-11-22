@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+</head>
+<body>
+<div class="qcu-modal" role="dialog" aria-modal="true" aria-labelledby="qcuModalTitle">
+    <button type="button" class="qcu-modal-close" aria-label="Close">&times;</button>
+
+    <div class="qcu-modal-scroll">
+        <img class="qcu-modal-photo" alt="">
+
+        <div class="qcu-modal-content">
+            <span class="qcu-modal-tag"></span>
+            <h2 id="qcuModalTitle"></h2>
+
+            <h3>About this event</h3>
+            <p class="qcu-modal-about"></p>
+
+            <dl class="qcu-modal-details"></dl>
+
+            <div class="qcu-owner-tools" hidden>
+                <div class="qcu-owner-actions">
+                    <a class="qcu-edit-btn" href="#">Edit this event</a>
+                    <button type="button" class="qcu-delete-btn">Delete this event</button>
+                </div>
+
+                <h4 class="qcu-registrants-title"></h4>
+                <p class="qcu-registrants-empty" hidden>No one has registered yet.</p>
+
+                <div class="qcu-registrants-wrap">
+                    <table class="qcu-registrants-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Student ID</th>
+                                <th>Email</th>
+                                <th>Registered</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Registration -->
+            <div class="qcu-register">
+                <p class="qcu-register-count"></p>
+                <button type="button" class="qcu-register-btn" id="qcuRegisterBtn">Register for this event</button>
+
+                <form class="qcu-register-form" hidden>
+                    <label>Full name<input type="text" name="fullName" required maxlength="80"></label>
+                    <label>Student ID<input type="text" name="studentId" required maxlength="20"></label>
+                    <label>Email<input type="email" name="email" required maxlength="120"></label>
+                    <button type="submit" class="qcu-register-btn">Confirm registration</button>
+                </form>
+
+                <p class="qcu-register-msg" role="status"></p>
+            </div>
+        </div>
+    </div>
+</div>

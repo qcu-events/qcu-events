@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | QCU EVENTS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="events.js" defer></script>
+</head>
+<body class="signup-page">
+
+    <main class="signup-wrapper">
+
+        <section class="signup-form-side">
+
+            <div class="signup-brand">QCU EVENTS</div>
+
+            <div class="signup-content">
+
+                <span class="signup-eyebrow">
+                    YOUR CAMPUS, YOUR COMMUNITY
+                </span>
+
+                <h1>Create an Account</h1>
+
+                <p class="signup-subtitle">
+                    Join QCU EVENTS and discover campus activities.
+                </p>
+
+                <form action="signup.php" method="POST">
+
+                    <p id="error" style="color:red;" hidden></p>
+
+                    <div class="signup-field">
+                        <label for="role">Register As</label>
+                        <select id="role" name="role" required>
+                            <option value="">Select Account Type</option>
+                            <option value="participant">Participant</option>
+                            <option value="organizer">Organizer</option>
+                        </select>
+                    </div>
+
+                    <div class="signup-field">
+                        <label for="studentID">Student ID</label>
+                        <input type="text"
+                               id="studentID"
+                               name="studentID"
+                               placeholder="Enter your Student ID"
+                               required>
+                    </div>
+
+                    <div class="signup-field">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               required>
+                    </div>
+
+                    <div class="signup-field">
+                        <label for="password">Create Password</label>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Create a password"
+                               minlength="8"
+                               required>
+                    </div>
+
+                    <button type="submit" class="signup-submit">
+                        Sign Up <span>→</span>
+                    </button>
+
+                </form>
+
+                <div class="signup-login">
+                    Already have an account?
+                    <a href="login.html">Log In</a>
+                </div>
+
+                <a href="index.html" class="signup-back">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+            <div class="signup-copyright">
+                © 2026 QCU Events
+            </div>
+
+        </section>
+
+        <section class="signup-gradient-side">
+
+            <div class="signup-circle signup-circle-one"></div>
+            <div class="signup-circle signup-circle-two"></div>
+            <div class="signup-circle signup-circle-three"></div>
+
+            <div class="signup-side-content">
+
+                <span>DISCOVER. CONNECT. EXPERIENCE.</span>
+
+                <h2>Be part of your campus community.</h2>
+
+                <p>
+                    Discover exciting events, connect with organizations,
+                    and make every campus moment count.
+                </p>
+
+            </div>
+
+            <div class="signup-side-label">
+                QUEZON CITY UNIVERSITY
+            </div>
+
+        </section>
+
+    </main>
+
+
+</body>
+</html>
